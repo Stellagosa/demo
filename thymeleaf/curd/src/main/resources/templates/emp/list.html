@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Dashboard Template · Bootstrap</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+  <link href="/css/dashboard.css" rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+
+<body>
+
+<div th:replace="commons/bar::topbar"></div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div th:replace="commons/bar::#sidebarMenu(activeUrl='emps')"></div>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <h2>
+        <a type="button" class="btn btn-primary btn-sm" th:href="@{/emp}">添加</a>
+      </h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm text-center">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Department</th>
+            <th>Birthday</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="emp : ${emps}">
+            <td th:text="${emp.id}"></td>
+            <td th:text="${emp.lastName}"></td>
+            <td th:text="${emp.email}"></td>
+            <td th:text="${emp.gender == 1 ? '男':'女'}"></td>
+            <td th:text="${emp.department.departmentName}"></td>
+            <td th:text="${emp.birthday}"></td>
+            <td>
+              <a type="button" class="btn btn-warning btn-sm" th:href="@{/emp/}+${emp.id}">修改</a>
+              <button th:attr="del_url=@{/emp/}+${emp.id}" onclick="" class="btn btn-danger btn-sm deleteEmp">删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <form id="deleteForm" method="post">
+      <input type="hidden" name="_method" value="delete"/>
+    </form>
+  </div>
+</div>
+
+<script src="/js/jquery.slim.min.js" th:src="@{/js/jquery.slim.min.js}"></script>
+<script src="/js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+<script>
+  $(".deleteEmp").click(function () {
+    $("#deleteForm").attr("action", $(this).attr("del_url")).submit()
+  });
+</script>
+</body>
+</html>

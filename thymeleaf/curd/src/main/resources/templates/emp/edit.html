@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Dashboard Template · Bootstrap</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+  <link href="/css/dashboard.css" rel="stylesheet" th:href="@{/css/dashboard.css}">
+  <link href="/css/dashboard.css" rel="stylesheet" th:href="@{/css/add.css}">
+</head>
+</head>
+
+<body>
+
+<div th:replace="commons/bar::topbar"></div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div th:replace="commons/bar::#sidebarMenu(activeUrl='emps')"></div>
+
+    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <form class="col-4" th:action="@{/emp}" method="post">
+
+        <div>
+          <!--转成 put请求-->
+          <input type="hidden" name="_method" value="put"/>
+          <!--员工id-->
+          <input type="hidden" name="id" th:value="${emp.id}"/>
+        </div>
+
+        <div class="form-row form-group">
+          <label class="col-2 text-right col-form-label">姓名：</label>
+          <div class="col-10">
+            <input class="form-control" type="text" name="lastName" placeholder="姓名" th:value="${emp.lastName}">
+          </div>
+
+        </div>
+
+        <div class="form-row form-group">
+          <label class="col-2  text-right col-form-label">邮箱：</label>
+          <div class="col-10">
+            <input class="form-control" type="email" name="email" placeholder="name@example.com"
+                   th:value="${emp.email}">
+          </div>
+        </div>
+
+        <div class="form-row form-group">
+          <label class="col-2 text-right col-form-label">性别：</label>
+          <div class="col-10 form-inline">
+            <div class="form-inline radio">
+              <input type="radio" name="gender" value="1" th:checked="${emp.gender==1}">
+              <label>男</label>
+            </div>
+            <div class="form-inline radio">
+              <input type="radio" name="gender" value="0" th:checked="${emp.gender==0}">
+              <label>女</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row form-group">
+          <label class="col-2 text-right col-form-label">部门：</label>
+          <div class="col-10">
+            <select class="form-control" style="width: 100%" name="department.id">
+              <option th:each="dept : ${depts}" th:text="${dept.departmentName}" th:value="${dept.id}"
+                      th:selected="${dept.id==emp.department.id}">部门
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row form-group">
+          <label class="col-2  text-right col-form-label">生日：</label>
+          <div class="col-10">
+            <input class="form-control" type="date" for name="birthday" th:value="${emp.birthday}">
+          </div>
+        </div>
+        <div class="form-row form-group">
+          <button type="submit" class="btn btn-primary col-8">修改</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+
+<script src="/js/jquery.slim.min.js" th:src="@{/js/jquery.slim.min.js}"></script>
+<script src="/js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+</body>
+
+</html>

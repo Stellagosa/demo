@@ -1,0 +1,13 @@
+main form {
+    margin: 40px auto;
+}
+
+form .form-group .radio {
+    margin: 0 40px;
+}
+form .form-group .radio input, form .form-group .radio label {
+    margin: 0 5px;
+}
+form .form-group button {
+    margin: auto;
+}

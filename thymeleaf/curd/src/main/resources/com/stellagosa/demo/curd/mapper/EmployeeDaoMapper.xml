@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stellagosa.demo.curd.dao.EmployeeDao">
+  <insert id="addEmployee" parameterType="com.stellagosa.demo.curd.entity.Employee">
+    insert into t_employee(id, lastName, email, gender, departmentId, birthday)
+    values(#{id}, #{lastName}, #{email}, #{gender}, #{department.id}, #{birthday})
+  </insert>
+  <update id="updateEmployee" parameterType="com.stellagosa.demo.curd.entity.Employee">
+    update t_employee
+    set lastName = #{lastName}, email = #{email}, gender = #{gender},
+        departmentId = #{department.id}, birthday = #{birthday}
+    where id = #{id}
+  </update>
+  <delete id="deleteById" parameterType="integer">
+    delete from t_employee where id=#{id}
+  </delete>
+
+  <select id="queryById" resultMap="emp_dep" parameterType="integer">
+    select emp.id,emp.lastName,emp.email,emp.gender,emp.birthday,dep.id depId, dep.departmentName
+    from t_employee emp, t_department dep
+    where emp.departmentid = dep.id and emp.id = #{id}
+  </select>
+
+  <select id="queryAll" resultMap="emp_dep">
+    select emp.id,emp.lastName,emp.email,emp.gender,emp.birthday,dep.id depId, dep.departmentName
+    from t_employee emp, t_department dep
+    where emp.departmentid = dep.id
+  </select>
+  <resultMap id="emp_dep" type="com.stellagosa.demo.curd.entity.Employee">
+    <id column="id" property="id"/>
+    <id column="lastName" property="lastName"/>
+    <id column="email" property="email"/>
+    <id column="gender" property="gender"/>
+    <id column="birthday" property="birthday"/>
+    <association property="department" javaType="com.stellagosa.demo.curd.entity.Department">
+    <!--起个别名吧，不然有惊吓-->
+      <id column="depId" property="id"/>
+      <id column="departmentName" property="departmentName"/>
+    </association>
+  </resultMap>
+</mapper>

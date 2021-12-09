@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<img src="cid:test">
+<h1 th:text="'Hello, ' + ${name}"></h1>
+<span th:text="${text}"></span>
+</body>
+</html>

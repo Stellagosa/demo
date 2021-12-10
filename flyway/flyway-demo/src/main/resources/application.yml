@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${database.connection.url}/${database.connection.target}?${database.connection.params}
+    username: root
+    password: 123456
+    hikari:
+      # 最小空闲连接
+      minimum-idle: 2
+      # 最大连接数
+      maximum-pool-size: 20
+      # 连接最大存活时间，小于 30s 会被重置为 30min
+      max-lifetime: 1800000
+      # 连接超时时间，小于 250ms 会被重置为 30s
+      connection-timeout: 1000
+      # 验证连接是否有效的超时时间，小于 250ms 会被重置为 5s
+      validation-timeout: 2000
+      # 连接允许在池中闲置的最长时间，小于10s，会被重置为 10s,如果大于 max-lifetime,重置为0，代表永远不会退出
+      idle-timeout: 600000
+      # 如果连接池无法初始化，控制是否多久 fail
+      initialization-fail-timeout: 1
+      auto-commit: true
+  flyway:
+    # 是否启用
+    enabled: true
+    # 编码格式，默认 UTF-8
+    encoding: UTF-8
+    # sql 文件存放路径，默认 db/migration
+    locations: classpath:db/migration
+    # 脚本文件名称前缀，默认 V
+    sql-migration-prefix: V
+    # 脚本文件的分隔符，默认 __
+    sql-migration-separator: __
+    # 脚本文件后缀
+    sql-migration-suffixes: .sql
+    # 迁移时是否校验
+    validate-on-migrate: true
+    # 当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建 schema_version 表
+    baseline-on-migrate: true
+database:
+  connection:
+    target: flyway-demo
+    url: jdbc:mysql://localhost:3306
+    params: useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai

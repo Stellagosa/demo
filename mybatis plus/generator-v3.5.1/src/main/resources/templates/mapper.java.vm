@@ -1,0 +1,25 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+#if(${mapperAnnotation})
+import org.apache.ibatis.annotations.Mapper;
+#end
+
+/**
+ * @Author: ${author}
+ * @Date: ${date}
+#if(${table.comment})
+ * @Description: ${table.comment} Mapper 接口
+#end
+ */
+#if(${mapperAnnotation})
+@Mapper
+#end
+#if(${kotlin})
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+#else
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
+}
+#end

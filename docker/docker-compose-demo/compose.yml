@@ -1,0 +1,43 @@
+#本地没有 docker-compose 没用，还是扔到服务器，直接 up 吧
+version: "3"
+services:
+  eureka:
+    image: docker-compose-demo/eureka:latest
+    container_name: eureka
+    restart: always
+    networks:
+      - docker-compose-demo-net
+#    build:
+#      context: ./
+#      dockerfile: eureka-docker-compose-demo/Dockerfile
+    ports:
+      - 1001:1001
+  provider:
+    image: docker-compose-demo/provider:latest
+    container_name: provider
+    restart: always
+#    build:
+#      context: ./
+#      dockerfile: provider/Dockerfile
+    depends_on:
+      - eureka
+    networks:
+      - docker-compose-demo-net
+    ports:
+      - 1002:1002
+  customer:
+    image: docker-compose-demo/customer:latest
+    container_name: customer
+    restart: always
+#    build:
+#      context: ./
+#      dockerfile: customer/Dockerfile
+    depends_on:
+      - provider
+    networks:
+      - docker-compose-demo-net
+    ports:
+      - 1003:1003
+networks:
+  docker-compose-demo-net:
+    external: false

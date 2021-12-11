@@ -11,6 +11,7 @@
     <modules>
         <module>eureka-demo</module>
         <module>ribbon-demo</module>
+        <module>hystrix-demo</module>
     </modules>
 
     <properties>

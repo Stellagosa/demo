@@ -1,0 +1,37 @@
+body {
+    background-color: #c0ffb4;
+}
+
+input {
+    height: 25px;
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+    border: 1px solid rgba(200,200,200,0.8)
+}
+input:focus {
+    border-color: rgba(56, 80, 169, 0.8);
+    outline: none;
+}
+button {
+    height: 25px;
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    border: 1px solid rgba(243,238,238,0.22);
+    border-radius: 10px;
+}
+button:focus {
+    border-color: rgba(56, 80, 169, 0.8);
+    outline: none;
+}
+.title {
+    display: block;
+    text-align: center;
+}
+.formLogin {
+    background-color: #fcfcfc;
+    width: 350px;
+    margin: 150px auto;
+    padding: 15px;
+}

@@ -1,0 +1,14 @@
+spring:
+  thymeleaf:
+    cache: false
+  session:
+    store-type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+debug: true
+server:
+  servlet:
+    session:
+      timeout: 3000

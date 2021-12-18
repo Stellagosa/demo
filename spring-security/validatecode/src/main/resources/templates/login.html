@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <style>
+        body {
+            background-color: #d2b239;
+        }
+
+        .loginForm {
+            background-color: #ffffff;
+            width: 300px;
+            height: 350px;
+            padding: 20px;
+            margin: 150px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-item {
+            width: 80%;
+            margin: 0 auto 15px;
+        }
+        .form-item-input {
+            width: 100%;
+            padding: 0;
+        }
+
+        .form-item-vcode {
+            width: 80%;
+            margin: 0 auto 30px;
+        }
+
+        .form-item-vcode input {
+            width: 50%;
+            display: inline-block;
+        }
+        .form-item-vcode img {
+            display: inline-block;
+        }
+
+        img {
+            width: 100px;
+            height: 40px;
+            float: right;
+        }
+        input {
+            border: 1px solid rgba(198, 196, 183, 0.66);
+            height: 40px;
+        }
+        button {
+            border: 1px solid #ecebe7;;
+            width: 80%;
+            height: 35px;
+            background-color: #9fff2c;
+            border-radius: 8px;
+            margin: 0 auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        input:focus {
+            border-color: #7c448f;
+            outline: none;
+        }
+        button:focus {
+            border-color: #7c448f;
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="loginForm">
+    <h3 class="title">用户登录</h3>
+    <form action="/login" method="post">
+        <div class="form-item">
+            <input type="text" name="username" class="form-item-input" placeholder="请输入用户名">
+        </div>
+        <div class="form-item">
+            <input type="password" name="password" class="form-item-input" placeholder="请输入密码">
+        </div>
+        <div class="form-item-vcode">
+            <input type="text" name="imageCode" placeholder="请输入验证码">
+            <img src="/code/image" title="点击更换验证码" onclick="">
+        </div>
+        <button type="submit">确定</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket</title>
+</head>
+<body>
+<div>
+    <label>接受消息：</label><input type="text" id="text1" readonly/> <br>
+    <label>发送消息：</label><input type="text" id="text2"/>
+    <button onclick="sendMsg()">发送消息</button>
+</div>
+
+<script type="text/javascript">
+    let webSocket = new WebSocket("ws://localhost:1001/websocket")
+
+    function webSocketConfig() {
+        webSocket.onopen = () => {
+            console.log("获取连接")
+        }
+        webSocket.onerror = () => {
+            console.log("连接错误")
+        }
+        webSocket.onclose = () => {
+            console.log("连接关闭")
+        }
+        webSocket.onmessage = (event) => {
+            console.log("获取消息")
+            receiveMsg(event)
+        }
+    }
+
+    function receiveMsg(event) {
+        let text1 = document.getElementById("text1");
+        text1.value = event.data
+        console.log(event.data)
+    }
+
+    function sendMsg() {
+        let text2 = document.getElementById("text2");
+        webSocket.send(text2.value)
+    }
+
+    webSocketConfig()
+</script>
+</body>
+</html>

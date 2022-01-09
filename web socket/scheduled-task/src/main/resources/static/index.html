@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web socket</title>
+</head>
+<body>
+<div>
+    <label>当前时间：</label>
+    <label id="date"></label>
+</div>
+<script>
+    let webSocket = new WebSocket("ws://localhost:1001/websocket");
+
+    function webSocketConfig() {
+        webSocket.onopen = (event) => {
+            console.log("建立连接")
+        }
+        webSocket.onmessage = (event) => {
+            getMsg(event)
+        }
+        webSocket.onclose = (event) => {
+            console.log("连接关闭")
+        }
+    }
+
+    function getMsg(event) {
+        let date = document.getElementById("date")
+        date.innerText = event.data
+    }
+
+    webSocketConfig()
+
+</script>
+</body>
+</html>

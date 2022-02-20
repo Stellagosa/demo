@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天室</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<div class="login-form">
+    <div style="position: fixed; top: 50px">
+        用户: 密码 <br>
+        张三: 123 <br>
+        李四: 1234 <br>
+        王五: 12345 <br>
+        马六: 123456 <br>
+        Marry: 654321 <br>
+        Jack: 1357 <br>
+    </div>
+    <div class="form">
+        <div class="form-input-username">
+            <label for="inputUsername">用户：</label>
+            <input type="text" id="inputUsername" placeholder="username">
+        </div>
+        <div class="form-input-password">
+            <label for="inputPassword">密码：</label>
+            <input type="password" id="inputPassword" placeholder="password">
+        </div>
+        <div class="form-input-button">
+            <button onclick="loginButton()">登录</button>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="top-content">
+        <div id="is-online">不在线</div>
+        <div id="online-users">
+        </div>
+    </div>
+    <div class="main">
+        <div id="chat-target">聊天室</div>
+        <div class="content-show-msg" id="show-msg">
+        </div>
+        <div class="content-input">
+            <input type="text" id="inputText">
+            <button onclick="sendMsg()" disabled="true" id="sendMsg">确定</button>
+        </div>
+    </div>
+</div>
+<script src="/webjars/sockjs-client/1.5.1/sockjs.js"></script>
+<script src="webjars/stomp-websocket/2.3.4/stomp.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

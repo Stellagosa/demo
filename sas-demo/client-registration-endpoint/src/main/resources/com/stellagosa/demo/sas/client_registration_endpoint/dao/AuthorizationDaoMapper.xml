@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stellagosa.demo.sas.client_registration_endpoint.dao.AuthorizationDao">
+    <insert id="save" parameterType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Authorization">
+        insert into authorization(id,
+                                  registered_client_id,
+                                  principal_name,
+                                  authorization_grant_type,
+                                  attributes,
+                                  state,
+                                  authorization_code_value,
+                                  authorization_code_issued_at,
+                                  authorization_code_expires_at,
+                                  authorization_code_metadata,
+                                  access_token_value,
+                                  access_token_issued_at,
+                                  access_token_expires_at,
+                                  access_token_metadata,
+                                  access_token_type,
+                                  access_token_scopes,
+                                  refresh_token_value,
+                                  refresh_token_issued_at,
+                                  refresh_token_expires_at,
+                                  refresh_token_metadata,
+                                  oidc_id_token_value,
+                                  oidc_id_token_issued_at,
+                                  oidc_id_token_expires_at,
+                                  oidc_id_token_metadata,
+                                  oidc_id_token_claims)
+        values (#{id},
+                #{registeredClientId},
+                #{principalName},
+                #{authorizationGrantType},
+                #{attributes},
+                #{state},
+                #{authorizationCodeValue},
+                #{authorizationCodeIssuedAt},
+                #{authorizationCodeExpiresAt},
+                #{authorizationCodeMetadata},
+                #{accessTokenValue},
+                #{accessTokenIssuedAt},
+                #{accessTokenExpiresAt},
+                #{accessTokenMetadata},
+                #{accessTokenType},
+                #{accessTokenScopes},
+                #{refreshTokenValue},
+                #{refreshTokenIssuedAt},
+                #{refreshTokenExpiresAt},
+                #{refreshTokenMetadata},
+                #{oidcIdTokenValue},
+                #{oidcIdTokenIssuedAt},
+                #{oidcIdTokenExpiresAt},
+                #{oidcIdTokenMetadata},
+                #{oidcIdTokenClaims});
+    </insert>
+
+    <update id="update" parameterType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Authorization">
+        update authorization set
+        registered_client_id = #{registeredClientId},
+        principal_name = #{principalName},
+        authorization_grant_type = #{authorizationGrantType},
+        attributes = #{attributes},
+        state = #{state},
+        authorization_code_value = #{authorizationCodeValue},
+        authorization_code_issued_at = #{authorizationCodeIssuedAt},
+        authorization_code_expires_at = #{authorizationCodeExpiresAt},
+        authorization_code_metadata = #{authorizationCodeMetadata},
+        access_token_value = #{accessTokenValue},
+        access_token_issued_at = #{accessTokenIssuedAt},
+        access_token_expires_at = #{accessTokenExpiresAt},
+        access_token_metadata = #{accessTokenMetadata},
+        access_token_type = #{accessTokenType},
+        access_token_scopes= #{accessTokenScopes},
+        refresh_token_value = #{refreshTokenValue},
+        refresh_token_issued_at = #{refreshTokenIssuedAt},
+        refresh_token_expires_at = #{refreshTokenExpiresAt},
+        refresh_token_metadata = #{refreshTokenMetadata},
+        oidc_id_token_value = #{oidcIdTokenValue},
+        oidc_id_token_issued_at = #{oidcIdTokenIssuedAt},
+        oidc_id_token_expires_at = #{oidcIdTokenExpiresAt},
+        oidc_id_token_metadata = #{oidcIdTokenMetadata},
+        oidc_id_token_claims = #{oidcIdTokenClaims}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from authorization where id = #{param1};
+    </delete>
+
+    <select id="findById"
+            resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Authorization">
+        select *
+        from authorization
+        where id = #{param1};
+    </select>
+
+    <select id="findByStateOrCodeOrAccessTokenOrRefreshToken"
+            resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Authorization">
+        select *
+        from authorization
+        where state = #{param1}
+           or authorization_code_value = #{param1}
+           or access_token_value = #{param1}
+           or refresh_token_value = #{param1};
+    </select>
+
+    <select id="findByState"
+            resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Authorization">
+        select *
+        from authorization
+        where state = #{param1};
+    </select>
+
+    <select id="findByAccessTokenValue"
+            resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Authorization">
+        select *
+        from authorization
+        where access_token_value = #{param1};
+    </select>
+
+    <select id="findByAuthorizationCodeValue"
+            resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Authorization">
+        select *
+        from authorization
+        where authorization_code_value = #{param1}
+    </select>
+
+    <select id="findByRefreshTokenValue"
+            resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Authorization">
+        select *
+        from authorization
+        where refresh_token_value = #{param1};
+    </select>
+</mapper>
+
+
+

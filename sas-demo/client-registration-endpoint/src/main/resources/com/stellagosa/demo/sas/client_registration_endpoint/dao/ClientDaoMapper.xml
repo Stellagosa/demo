@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stellagosa.demo.sas.client_registration_endpoint.dao.ClientDao">
+    <select id="findByClientId" resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Client">
+        select *
+        from client
+        where client_id = #{clientId}
+    </select>
+
+    <select id="findById" resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Client">
+        select *
+        from client
+        where id = #{id}
+    </select>
+
+    <sql id="saveKeySql">
+        <if test="clientIdIssuedAt != null">
+            ,client_id_issued_at
+        </if>
+    </sql>
+
+    <sql id="saveValueSql">
+        <if test="clientIdIssuedAt != null">
+            ,#{clientIdIssuedAt}
+        </if>
+    </sql>
+
+
+    <insert id="save" parameterType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Client">
+        insert into client(id, client_id, client_secret,
+        client_secret_expires_at, client_name, client_authentication_methods,
+        authorization_grant_types,
+        redirect_uris, scopes, client_settings, token_settings<include refid="saveKeySql"/>)
+
+        values (#{id}, #{clientId}, #{clientSecret},
+        #{clientSecretExpiresAt, jdbcType=TIMESTAMP}, #{clientName},
+        #{clientAuthenticationMethods},
+        #{authorizationGrantTypes},
+        #{redirectUris},
+        #{scopes}, #{clientSettings}, #{tokenSettings}<include refid="saveValueSql"/>)
+
+    </insert>
+
+    <update id="update" parameterType="com.stellagosa.demo.sas.client_registration_endpoint.entity.Client">
+        update client set
+        client_id=#{clientId},
+        client_secret=#{clientSecret},
+        client_secret_expires_at=#{clientSecretExpiresAt},
+        client_name=#{clientName},
+        client_authentication_methods=#{clientAuthenticationMethods},
+        authorization_grant_types=#{authorizationGrantTypes},
+        redirect_uris=#{redirectUris},
+        scopes=#{scopes},
+        client_settings=#{clientSettings},
+        token_settings=#{tokenSettings}
+        <if test="clientIdIssuedAt != null">
+            ,client_id_issued_at = #{clientIdIssuedAt}
+        </if>
+        where id = #{id}
+    </update>
+</mapper>

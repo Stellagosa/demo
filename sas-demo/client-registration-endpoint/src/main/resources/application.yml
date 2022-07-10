@@ -1,0 +1,15 @@
+server:
+  port: 1001
+spring:
+  application:
+    name: custom-use-info
+  datasource:
+    url: jdbc:mysql://localhost:3306/db-oauth2-authorization-server?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:com/stellagosa/demo/sas/client_registration_endpoint/dao/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+debug: true

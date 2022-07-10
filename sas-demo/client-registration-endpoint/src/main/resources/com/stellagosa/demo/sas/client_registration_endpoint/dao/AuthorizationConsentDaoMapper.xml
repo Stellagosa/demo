@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stellagosa.demo.sas.client_registration_endpoint.dao.AuthorizationConsentDao">
+
+    <insert id="save" parameterType="com.stellagosa.demo.sas.client_registration_endpoint.entity.AuthorizationConsent">
+        insert into authorization_consent(registered_client_id, principal_name, authorities)
+        VALUES (#{registeredClientId}, #{principalName}, #{authorities});
+    </insert>
+
+    <update id="update"
+            parameterType="com.stellagosa.demo.sas.client_registration_endpoint.entity.AuthorizationConsent">
+        update authorization_consent set authorities = #{authorities}
+        where registered_client_id = #{registeredClientId}
+        and principal_name=#{principalName}
+    </update>
+
+    <delete id="deleteByRegisteredClientIdAndPrincipalName">
+        delete from authorization_consent
+        where registered_client_id = #{registeredClient_id} and principal_name = #{principalName} limit 1;
+    </delete>
+
+    <select id="findByRegisteredClientIdAndPrincipalName"
+            resultType="com.stellagosa.demo.sas.client_registration_endpoint.entity.AuthorizationConsent">
+        select *
+        from authorization_consent
+        where registered_client_id = #{param1}
+          and principal_name = #{param2};
+    </select>
+
+</mapper>

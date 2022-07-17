@@ -14,6 +14,7 @@
         <module>use-database</module>
         <module>custom-use-info</module>
         <module>client-registration-endpoint</module>
+        <module>password-demo</module>
     </modules>
 
     <properties>
